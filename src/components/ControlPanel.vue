@@ -1,0 +1,46 @@
+<template>
+    <div class="ControlPanel">
+        <h1> BLUE </h1>
+        <ul>
+            <li><router-link to="/"> Home </router-link></li>
+            <li><router-link to="/about"> Profile </router-link></li>
+            <li><router-link to="#"> Top </router-link></li>
+            <li><router-link to="#"> Make a statement </router-link></li>
+        
+        </ul>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "ControlPanel"        
+
+    }
+</script>
+
+<style scoped>
+.ControlPanel {
+    @apply text-white
+    flex
+    h-14 w-full
+    items-center
+    justify-evenly;
+}
+
+.ControlPanel ul {
+    @apply flex
+    ml-2
+    justify-self-end;
+}
+
+.ControlPanel ul li {
+    @apply ml-8
+    text-xl
+    font-semibold;
+}
+
+h1 {
+    @apply text-3xl
+    font-bold;
+}
+</style>
