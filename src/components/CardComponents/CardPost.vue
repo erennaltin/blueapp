@@ -1,9 +1,9 @@
 <template>
-    <div class="CardPost">
+    <div :class="PostClass">
     <h1> {{homePost.Title}} </h1>
     <p> {{homePost.Text}} </p>
     <img :src="homePost.Photo" />
-    <h2> See Details </h2>
+    <h2 @click="changeContainerMode"> See Details </h2>
     </div>
 </template>
 
@@ -12,14 +12,24 @@ export default {
     name: "CardPost",
     props: {
         homePost: Object,
+        changeContainerMode: Function,
+        ContainerMode: Boolean
+    },
+    computed: {
+        PostClass(){
+            return `CardPost ${this.ContainerMode}`
+        }
     }
 }
 </script>
 
 <style scoped>
 .CardPost {
-    @apply h-full
-    ml-4 mr-4;
+    @apply ml-4 mr-4;
+}
+
+.true {
+    max-width: 500px;
 }
 
 h1 {

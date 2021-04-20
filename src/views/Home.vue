@@ -1,20 +1,17 @@
 <template>
   <div class="Home">
-    <CardContainer />
+      <CardContainer class="card" id="card1" />
   </div>
 </template>
 
 <script>
 import CardContainer from '../components/CardComponents/CardContainer.vue'
-// @ is an alias to /src
-
 
 export default {
   name: 'Home',
   components: {
     CardContainer
-
-  }
+  },
 }
 </script>
 
@@ -22,5 +19,7 @@ export default {
 .Home {
   @apply flex items-center justify-center
   mt-6
+  overflow-hidden;
 }
+
 </style>

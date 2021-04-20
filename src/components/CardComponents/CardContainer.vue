@@ -1,8 +1,10 @@
 <template>
-    <div class="CardContainer">
-        <CardHeader :homePost="homePost" />
-        <CardPost :homePost="homePost" />
-        <CardTags :homePost="homePost" class="CardTags" />
+    <div :class="ContainerClass">
+        <div :class="PostClassifier">
+            <CardHeader :ContainerMode="ContainerMode" :homePost="homePost" class="Head"/>
+            <CardPost :ContainerMode="ContainerMode" :changeContainerMode="changeContainerMode" :homePost="homePost" class="Post" />
+            <CardTags v-if="!ContainerMode" :ContainerMode="ContainerMode" :homePost="homePost" />
+        </div>
     </div>
 </template>
 
@@ -21,24 +23,57 @@ export default {
     computed: {
         homePost(){
             return this.$store.state.homePost
+        },
+        ContainerClass(){
+            return `CardContainer ${this.ContainerMode}`
+        },
+    },
+    data(){
+        return {
+        ContainerMode: false,
+        PostClassifier: "Vertical"
         }
-    }
+    },
+    methods: {
+        changeContainerMode(){
+        this.ContainerMode = !this.ContainerMode
+        if(this.PostClassifier === "Vertical"){
+            this.PostClassifier = "Horizental";
+        }
+        else {
+            this.PostClassifier = "Vertical";
+        }
+        }
+    },
 }
 </script>
 
 <style scoped>
 .CardContainer {
-    width: 550px;
     height: 750px;
     @apply bg-gray-100 
     border-gray-300
     border-4
-    flex
-    flex-col;
+    flex;
     border-radius: 2rem;
 }
 
-.CardTags {
-    @apply justify-self-end;
+.false {
+    max-width: 550px;
+    min-width: 360px;
+    
+}
+
+.true {
+    width: 1400px;
+}
+
+.Horizental {
+    @apply flex mt-14 border-t-4 border-r-4;
+    width: 700px;
+}
+
+.Head {
+    order:1;
 }
 </style>

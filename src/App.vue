@@ -19,6 +19,6 @@ export default {
 
 <style scoped lang="css">
 .Layout {
-  @apply w-screen h-screen bg-blue-500;
+  @apply w-screen h-screen bg-blue-500 overflow-hidden;
 }
 </style>
