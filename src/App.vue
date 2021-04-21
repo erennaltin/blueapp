@@ -1,18 +1,18 @@
 <template>
   <div class= "Layout">
-    <ControlPanel />
+    <Navigation />
   <router-view/>
   </div>
 </template>
 
 <script>
-import ControlPanel from "@/components/ControlPanel.vue"
+import Navigation from "@/components/Navigation.vue"
 
 
 export default {
   name: "App",
   components: {
-    ControlPanel
+    Navigation
   }
 }
 </script>

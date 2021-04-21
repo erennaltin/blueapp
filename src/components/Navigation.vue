@@ -13,7 +13,7 @@
 
 <script>
 export default {
-    name: "ControlPanel"        
+    name: "Navigation"        
 
     }
 </script>
