@@ -7,11 +7,6 @@
 <script>
 export default {
     name: "ProfileCircle",
-    // data() {
-    //     return {
-    //         source:
-    //     }
-    // },
     props: {
         class: {
             type: String,

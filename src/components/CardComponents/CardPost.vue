@@ -1,9 +1,9 @@
 <template>
     <div :class="PostClass">
     <h1> {{homePost.Title}} </h1>
-    <p> {{homePost.Text}} </p>
+    <p :class="TextClass"> {{homePost.Text}} </p>
     <img :src="homePost.Photo" />
-    <h2 @click="changeContainerMode"> See Details </h2>
+    <h2 v-if="!ContainerMode" @click="changeContainerMode"> See Details </h2>
     </div>
 </template>
 
@@ -18,6 +18,9 @@ export default {
     computed: {
         PostClass(){
             return `CardPost ${this.ContainerMode}`
+        },
+        TextClass(){
+            return `Text${this.ContainerMode}`
         }
     }
 }
@@ -30,6 +33,7 @@ export default {
 
 .true {
     max-width: 500px;
+    @apply overflow-y-scroll;
 }
 
 h1 {
@@ -39,11 +43,9 @@ h1 {
 }
 
 p {
-    @apply h-52 overflow-hidden overflow-y-scroll 
+    @apply overflow-hidden overflow-y-scroll 
     mb-8 pb-6;
--webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-  scrollbar-width: 0;
+
 }
 
 p::-webkit-scrollbar {
@@ -58,6 +60,17 @@ h2 {
     @apply text-center
     font-bold
     text-lg
-    h-16 flex items-center justify-center
+    h-16 flex items-center justify-center;
+}
+
+.Textfalse {
+    @apply h-52;
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    scrollbar-width: 0;
+}
+
+.Texttrue {
+    height: fit-content;
 }
 </style>
