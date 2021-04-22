@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Comment from "./Comment.vue";
+import Comment from "./Fragment.vue";
 
 export default {
     name:"CardObjection",
@@ -132,7 +132,7 @@ h1 {
     @apply h-14 flex items-center justify-center
     font-bold
     text-xl
-    border-b-4;
+    border-b-4 border-r-4;
 }
 
 .SectionContainer {

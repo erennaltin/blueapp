@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Comment from "./Comment.vue";
+import Comment from "./Fragment.vue";
 import SendComment from "@/assets/Icons/SendComment.svg"
 
 export default {

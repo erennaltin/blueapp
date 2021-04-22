@@ -1,31 +1,17 @@
 <template>
     <div :class="ContainerClass">
-        <p v-if="ContainerMode" @click="changeContainerMode" class="CloseDetail"> X Close Detail </p>
-        <div :class="PostClassifier">
-            <CardHeader :ContainerMode="ContainerMode" :homePost="homePost" class="Head"/>
-            <CardPost :ContainerMode="ContainerMode" :changeContainerMode="changeContainerMode" :homePost="homePost" class="Post" />
-            <CardTags v-if="!ContainerMode" :ContainerMode="ContainerMode" :homePost="homePost" />
-        </div>
-        <CardObjection v-if="ContainerMode" :homePost="homePost" />
-        <CardComment v-if="ContainerMode" :homePost="homePost" />
+        <HomeContainer :ContainerMode="ContainerMode" :changeContainerMode="changeContainerMode"/>
     </div>
 </template>
 
 <script>
-import CardComment from './CardComment.vue'
-import CardHeader from './CardHeader.vue'
-import CardObjection from './CardObjection.vue'
-import CardPost from './CardPost.vue'
-import CardTags from './CardTags.vue'
+
+import HomeContainer from './HomeContainer.vue'
 
 export default {
     name:"CardContainer",
     components: { 
-        CardHeader,
-        CardTags,
-        CardPost,
-        CardComment,
-        CardObjection
+        HomeContainer
         },
     computed: {
         homePost(){
