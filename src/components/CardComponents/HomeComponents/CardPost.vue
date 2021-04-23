@@ -28,7 +28,7 @@ export default {
 
 <style scoped>
 .CardPost {
-    @apply ml-4 mr-4;
+    @apply ml-4 mr-4 pr-2;
 }
 
 .true {

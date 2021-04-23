@@ -85,6 +85,7 @@ input:focus {
 }
 
 .last {
-    @apply border-r-0 mr-2
+    @apply border-r-0 pr-2
+
 }
 </style>

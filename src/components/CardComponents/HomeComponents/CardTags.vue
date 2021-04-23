@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Settings from '@/assets/Icons/setting.svg'
+import Settings from '@/assets/Icons/Settings.svg'
 
 
 export default {

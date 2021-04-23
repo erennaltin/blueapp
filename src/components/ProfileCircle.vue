@@ -8,14 +8,14 @@
 export default {
     name: "ProfileCircle",
     props: {
-        class: {
+        size: {
             type: String,
             default: "sm"
         }
     },
     computed: {
         className: function(){
-            return `circle ${this.class}`
+            return `circle ${this.size}`
         },
         source(){
             return this.$store.state.user.profilePicture;
@@ -35,6 +35,10 @@ export default {
 
 .sm {
     @apply w-10 h-10;
+}
+
+.xl {
+    @apply w-24 h-24
 }
 
 </style>

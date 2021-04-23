@@ -3,7 +3,7 @@
         <h1> BLUE </h1>
         <ul>
             <li><router-link to="/"> Home </router-link></li>
-            <li><router-link to="/about"> Profile </router-link></li>
+            <li><router-link to="/profile"> Profile </router-link></li>
             <li><router-link to="#"> Top </router-link></li>
             <li><router-link to="#"> Make a statement </router-link></li>
         
@@ -24,7 +24,7 @@ export default {
     flex
     h-14 w-full
     items-center
-    justify-evenly;
+    justify-evenly mb-6;
 }
 
 .ControlPanel ul {

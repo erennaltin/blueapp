@@ -1,6 +1,6 @@
 <template>
     <div class="Comment">
-        <profile-circle />
+        <profile-circle size="sm"/>
         <div class="Container">
             <p> {{fragment.Text}} </p>
             <div class="Informations"> 

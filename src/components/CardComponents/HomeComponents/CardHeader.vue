@@ -13,7 +13,7 @@
 
 <script>
 
-import ProfileCircle from '../ProfileCircle.vue'
+import ProfileCircle from '../../ProfileCircle.vue'
 
 export default {
     name: "CardHeader",

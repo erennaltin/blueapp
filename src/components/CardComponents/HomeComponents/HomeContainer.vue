@@ -15,7 +15,7 @@
 import CardHeader from './CardHeader.vue'
 import CardPost from './CardPost.vue'
 import CardTags from './CardTags.vue'
-import SectionContainer from './SectionContainer.vue'
+import SectionContainer from '../SectionContainer.vue'
 import MakeObjectionButton from './MakeObjectionButton.vue'
 import CommentBar from './CommentBar.vue'
 
