@@ -17,7 +17,11 @@ export default {
 }
 
 button {
-    @apply bg-blue-400 h-14 rounded-xl 
+    @apply bg-blue-400 h-14 rounded-xl outline-none
     text-lg w-full font-semibold text-white;
+}
+
+button:focus {
+    @apply outline-none;
 }
 </style>

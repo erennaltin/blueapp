@@ -21,3 +21,7 @@
 ::-webkit-scrollbar-thumb:hover {
     @apply bg-gray-500; 
 }
+
+* {
+  @apply outline-none bg-transparent
+}
