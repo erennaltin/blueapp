@@ -1,7 +1,7 @@
 query getRandomPost {
-      posts {
-    uuid
-    Title
-    Text
-  }
+      randomPost {
+        Title
+        Text
+        PostId
+      }
 }

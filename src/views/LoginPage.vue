@@ -2,14 +2,14 @@
     <div class="LoginPage">
         <div class="LoginCard">
             <p> BLUE </p>
-            <form method="POST"  action="http://127.0.0.1:8000/graphql">
+            <form method="POST"  @submit.prevent="Login">
                 <div>
                     <label v-if="username != ''" for="usernameInput" > Username </label>
                     <input type="text" id="usernameInput" name="usernameInput" placeholder="username" v-model="username"/>
                 </div>
                 <div>
                     <label v-if="password != ''" for="passwordInput" > Password </label>
-                    <input type="text" id="passwordInput" name="passwordInput" placeholder="password" v-model="password"/>
+                    <input type="password" id="passwordInput" name="passwordInput" placeholder="password" v-model="password"/>
                 </div>
                 <input type="submit" value="Log In"/>
             </form>
@@ -18,27 +18,32 @@
 </template>
 
 <script>
-// const axios = require('axios');
+import {ref} from 'vue'
+import {useMutation} from '@vue/apollo-composable'
+import loginMutation from '@/graphql/login.mutation.gql'
+// import { mapActions } from 'vuex'
 
 export default {
     name: "LoginPage",
-    data(){
-        return {
-            username: "",
-            password: ""
-        }
-    },
-methods: {
-        // LoginFunc(e){
-        //     query = {query: {
-        //             tokenAuth(username: this.username, password: this.password)
-        //         }
-        //     }
-            
-        //     e.preventDefault();
-        // }
+    setup() {
+        const username = ref('')
+        const password = ref('')
+
+        const {mutate: Login, onDone} = useMutation(loginMutation, () => ({
+            variables: {
+                username: username.value,
+                password: password.value
+            }
+        }))
+
+        onDone(result => {
+            const token = result.data.tokenAuth.token;
+            console.log(token)
+            localStorage.setItem("token", token);
+        })
+
+        return {username, password, Login}
     }
- 
 }
 </script>
 

@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-const axios = require('axios').default;
+
 
 export default createStore({
   state: {
@@ -20,17 +20,9 @@ export default createStore({
 
   },
   mutations: {
-    SET_POSTS(state, user) {
-      state.user = user
-      }
   },
   actions: {
-    getUser({ commit }) {
-      axios.get('http://127.0.0.1:8000/graphql')
-      .then(response => {
-      commit('SET_POSTS', response.data)
-        })
-      }
+
   },
   modules: {
   }
