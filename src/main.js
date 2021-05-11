@@ -47,6 +47,8 @@ const defaultClient = new ApolloClient({
     connectToDevTools: true
 })
 
+export default defaultClient;
+
 
 
 createApp({

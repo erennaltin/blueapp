@@ -15,6 +15,10 @@
 import CardContainer from '../components/CardComponents/CardContainer.vue'
 import ControlButton from '../components/ControlButton.vue'
 import HomeContainer from '../components/CardComponents/HomeComponents/HomeContainer.vue'
+import { useQuery, useResult } from '../../node_modules/@vue/apollo-composable/dist'
+import getRandomPostQuery from '@/graphql/getRandomPost.query.gql'
+import { watch } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   name: 'Home',
@@ -45,6 +49,19 @@ export default {
         }
         }
     },
+    setup(){
+      const {result, loading} = useQuery(getRandomPostQuery)
+      const RandomPost = useResult(result, {}, data => data.randomPost)
+      const store = useStore()
+      const getPost =(post) => store.dispatch('getPost',post)
+      
+      watch(loading, () => {
+        console.log(RandomPost.value)
+        getPost(RandomPost.value);
+      })
+
+      return { RandomPost}
+    }
 }
 </script>
 

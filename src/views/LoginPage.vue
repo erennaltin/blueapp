@@ -3,6 +3,7 @@
         <div class="LoginCard">
             <p> BLUE </p>
             <form method="POST"  @submit.prevent="Login">
+                <p v-if="error"> Please check your credentials! </p>
                 <div>
                     <label v-if="username != ''" for="usernameInput" > Username </label>
                     <input type="text" id="usernameInput" name="usernameInput" placeholder="username" v-model="username"/>
@@ -21,28 +22,41 @@
 import {ref} from 'vue'
 import {useMutation} from '@vue/apollo-composable'
 import loginMutation from '@/graphql/login.mutation.gql'
-// import { mapActions } from 'vuex'
+// import {useRouter} from 'vue-router'
+import {useStore} from 'vuex'
 
 export default {
     name: "LoginPage",
     setup() {
+        console.log("selaaama")
         const username = ref('')
         const password = ref('')
-
-        const {mutate: Login, onDone} = useMutation(loginMutation, () => ({
+        const error = ref(false)
+        const store = useStore()
+        const getUser =async (user) =>await store.dispatch('getUser',user)
+        // const router = useRouter()
+        const {mutate: Login, loading, onDone} = useMutation(loginMutation, () => ({
             variables: {
                 username: username.value,
                 password: password.value
             }
         }))
 
-        onDone(result => {
+        onDone(function(result) {
+            const success = result.data.tokenAuth.success
             const token = result.data.tokenAuth.token;
-            console.log(token)
             localStorage.setItem("token", token);
+            if (success) {
+                const user = result.data.tokenAuth.user
+                getUser(user)
+                location.reload() 
+                }
+            else {error.value = true}
         })
+        // watch(loading, () => {
+        // })
 
-        return {username, password, Login}
+        return {username, password, Login, error,loading}
     }
 }
 </script>

@@ -17,7 +17,8 @@ export default {
         Settings
     },
     props: {
-        homePost: Object
+        homePost: Object,
+        InitialPost: Object,
     },
     data(){
         return {
@@ -25,7 +26,7 @@ export default {
         }
     },
     beforeMount(){
-        this.tagArray = [...this.homePost.Tags.split(",")]
+        this.tagArray = [...this.InitialPost.Tags.split(",")] || [...this.homePost.Tags.split(",")]
     }
 }
 </script>

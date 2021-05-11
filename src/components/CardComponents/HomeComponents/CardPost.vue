@@ -1,8 +1,8 @@
 <template>
     <div :class="PostClass">
-    <h1> {{homePost.Title}} </h1>
-    <p :class="TextClass"> {{homePost.Text}} </p>
-    <img :src="homePost.Photo" />
+    <h1> {{InitialPost.Title || homePost.Title}} </h1>
+    <p :class="TextClass"> {{InitialPost.Text || homePost.Text}} </p>
+    <img :src="`${ServerMedia}${InitialPost.Photo}` || homePost.Photo" />
     <h2 v-if="!ContainerMode" @click="changeContainerMode"> See Details </h2>
     </div>
 </template>
@@ -13,7 +13,8 @@ export default {
     props: {
         homePost: Object,
         changeContainerMode: Function,
-        ContainerMode: Boolean
+        ContainerMode: Boolean,
+        InitialPost: Object,
     },
     computed: {
         PostClass(){
@@ -21,6 +22,9 @@ export default {
         },
         TextClass(){
             return `Text${this.ContainerMode}`
+        },
+        ServerMedia(){
+            return this.$store.state.serverMedia
         }
     }
 }

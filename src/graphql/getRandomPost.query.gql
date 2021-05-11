@@ -1,7 +1,11 @@
 query getRandomPost {
       randomPost {
-        Title
-        Text
-        PostId
-      }
+      uuid
+      PublishDate
+      Title
+      Text
+      Photo
+      Tags
+      Category
+    }
 }

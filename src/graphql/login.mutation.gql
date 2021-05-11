@@ -3,5 +3,11 @@ mutation login ($username: String!, $password: String!){
     token
     success
     errors
+    user {
+      username
+      userImage {
+        image
+      }
+    }
   }
 }

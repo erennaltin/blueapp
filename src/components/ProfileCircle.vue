@@ -18,7 +18,7 @@ export default {
             return `circle ${this.size}`
         },
         source(){
-            return this.$store.state.user.profilePicture;
+            return `http://127.0.0.1:8000/media/${this.$store.state.user2.photo}` || "http://127.0.0.1:8000/media/images/unknown_yL1rdRV.png";
         }
     }    
     }

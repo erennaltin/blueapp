@@ -3,15 +3,16 @@
         <div class="Informations">
             <ProfileCircle class="sm" />
             <div class="PostInformations">
-                <h1> {{username}} </h1>
-                <h3> {{homePost.PublishDate}} </h3>
+                <h1> {{user2.username}} </h1>
+                <h3> {{ PublishDate || homePost.PublishDate}} </h3>
             </div>
         </div>
-        <p :class="CategoryClass"> {{homePost.Category.toUpperCase()}} </p>
+        <p :class="CategoryClass"> {{ InitialPost ? InitialPost.Category.toUpperCase() : homePost.Category.toUpperCase()}} </p>
     </div>
 </template>
 
 <script>
+// import { computed } from '../../../../node_modules/vue/dist/vue'
 
 import ProfileCircle from '../../ProfileCircle.vue'
 
@@ -23,18 +24,32 @@ export default {
     props: {
         homePost: Object,
         ContainerMode: Boolean,
+        InitialPost: Object,
     },
     computed: {
         username(){
             return this.$store.state.user.Username
+        },
+        user2(){
+            return this.$store.state.user2 || {}
         },
         HeaderClass(){
             return `CardHeader ${this.ContainerMode}`
         },
         CategoryClass(){
             return `Category ${this.ContainerMode}`
+        },
+        PublishDate() {
+            this.InitialPost;
+            let date = this.InitialPost.PublishDate.slice(0,10)
+            let clock = this.InitialPost.PublishDate.slice(11,16)
+            return `${date} - ${clock}`
         }
-    }
+
+    },
+    // setup(props) {
+    //     computed(props.InitialPost.PublishDate, )
+    // }
 }
 </script>
 

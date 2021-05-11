@@ -3,7 +3,7 @@
         <div class="topBorder"></div>
         <ProfileSummary />
         <div class="textSummary">
-            <p :class="summaryClass" v-if="profilePath === 'Profile'">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam distinctio quisquam, eos quam iure alias eveniet tempore accusamus voluptatem odit fugiat sint minima, eius et esse? Illum temporibus quasi voluptates. I am a student who wants a platform that people can share their thought freely. Freedom is a intrinsic part of being human!</p>
+            <p :class="summaryClass" v-if="profilePath === 'Profile'"> {{user.bio}}</p>
             <button @click="showMore"> See {{seeMore}} </button>
         </div>
         <h1> Statements </h1> <hr>
@@ -43,6 +43,9 @@ export default {
         },
         summaryClass(){
             return `summaryText ${this.seeMore} `
+        },
+        user(){
+            return this.$store.state.user2
         }
     },
     methods: {

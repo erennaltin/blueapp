@@ -2,9 +2,9 @@
     <div :class="ContainerClass">
         <p v-if="ContainerMode" @click="changeContainerMode" class="CloseDetail"> X Close Detail </p>
         <div :class="PostClassifier">
-            <CardHeader :ContainerMode="ContainerMode" :homePost="homePost" class="Head"/>
-            <CardPost :ContainerMode="ContainerMode" :changeContainerMode="changeContainerMode" :homePost="homePost" class="Post" />
-            <CardTags v-if="!ContainerMode" :ContainerMode="ContainerMode" :homePost="homePost" />
+            <CardHeader :ContainerMode="ContainerMode" :InitialPost="InitialPost" :homePost="homePost" class="Head"/>
+            <CardPost :ContainerMode="ContainerMode" :InitialPost="InitialPost" :changeContainerMode="changeContainerMode" :homePost="homePost" class="Post" />
+            <CardTags v-if="!ContainerMode" :ContainerMode="ContainerMode" :InitialPost="InitialPost" :homePost="homePost" />
         </div>
         <SectionContainer v-if="ContainerMode" title="Objections" :information="Objections" > <MakeObjectionButton /> </SectionContainer>
         <SectionContainer v-if="ContainerMode" title="Comments" :information="Comments" isLast="last"> <CommentBar /> </SectionContainer>
@@ -38,6 +38,9 @@ export default {
     computed: {
         homePost(){
             return this.$store.state.homePost
+        },
+        InitialPost(){
+            return this.$store.state.InitialPost
         },
         ContainerClass(){
             return `HomeContainer ${this.ContainerMode}`
