@@ -1,0 +1,7 @@
+mutation addComment($postUuid: String!, $username: String!, $Text: String!) {
+  addComment(postUuid: $postUuid, username: $username, Text: $Text) {
+    comment {
+      name
+    }
+  }
+}

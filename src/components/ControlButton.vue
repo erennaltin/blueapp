@@ -37,7 +37,8 @@ export default {
 <style scoped>
 .ControlButton {
     @apply w-20 h-20 rounded-full
-    flex justify-center items-center;
+    flex justify-center items-center
+    cursor-pointer;
 }
 
 .Image {

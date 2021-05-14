@@ -5,7 +5,7 @@
         <ControlButton Component="Approve" v-if="Mode !== 'Approve'" @click="addApprove"/>
         <ControlButton Component="Decline" v-if="Mode !== 'Decline'" @click="removeApprove"/>
         <ControlButton Component="Objection" />
-        <ControlButton Component="Comment" />
+        <ControlButton Component="Comment" @click="() => {ContainerMode === false ? changeContainerMode() : ''}"/>
         <!-- <p> {{ifApproval.name}}</p> -->
 
       </div>
