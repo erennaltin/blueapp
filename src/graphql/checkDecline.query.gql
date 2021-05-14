@@ -1,0 +1,5 @@
+query checkDecline($name: String!){
+  decline(name: $name){
+    name
+  }
+}

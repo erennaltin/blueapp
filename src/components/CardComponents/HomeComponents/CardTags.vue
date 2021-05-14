@@ -25,8 +25,14 @@ export default {
             tagArray: [],
         }
     },
+    
     beforeMount(){
         this.tagArray = [...this.InitialPost.Tags.split(",")] || [...this.homePost.Tags.split(",")]
+    },
+    watch: {
+        InitialPost() {
+            this.tagArray =  [...this.InitialPost.Tags.split(",")]
+        }
     }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div class="LoginPage">
         <div class="LoginCard">
-            <p> BLUE </p>
+            <p class="blue"> BLUE </p>
             <form method="POST"  @submit.prevent="Login">
                 <p v-if="error"> Please check your credentials! </p>
                 <div>
@@ -14,6 +14,7 @@
                 </div>
                 <input type="submit" value="Log In"/>
             </form>
+            <p @click="signup" class="signup"> Sign Up! </p>
         </div>
     </div>
 </template>
@@ -24,6 +25,7 @@ import {useMutation} from '@vue/apollo-composable'
 import loginMutation from '@/graphql/login.mutation.gql'
 // import {useRouter} from 'vue-router'
 import {useStore} from 'vuex'
+import { useRouter } from 'vue-router'
 
 export default {
     name: "LoginPage",
@@ -33,6 +35,7 @@ export default {
         const password = ref('')
         const error = ref(false)
         const store = useStore()
+        const router = useRouter()
         const getUser =async (user) =>await store.dispatch('getUser',user)
         // const router = useRouter()
         const {mutate: Login, loading, onDone} = useMutation(loginMutation, () => ({
@@ -53,10 +56,12 @@ export default {
                 }
             else {error.value = true}
         })
-        // watch(loading, () => {
-        // })
+        
+        const signup = () => {
+            router.push('/signup')
+        }
 
-        return {username, password, Login, error,loading}
+        return {username, password, Login, error,loading,signup}
     }
 }
 </script>
@@ -100,5 +105,21 @@ export default {
 
 .LoginCard input[type=submit]:hover {
     @apply bg-blue-500;
+}
+
+.signup {
+    @apply text-gray-400 font-bold text-lg pb-8 transition cursor-pointer;
+}
+
+.blue {
+    @apply text-gray-400 font-bold text-lg pt-8 transition cursor-default;
+}
+
+.signup:hover {
+    @apply text-gray-500;
+}
+
+.blue:hover {
+    @apply text-blue-400;
 }
 </style>

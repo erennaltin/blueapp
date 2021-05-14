@@ -1,0 +1,7 @@
+mutation CreatePost($postData: PostInput!) {
+  addPost(postData: $postData) {
+    post {
+      Text
+    }
+  }
+}

@@ -1,0 +1,7 @@
+mutation addApproval($postUuid: String!, $username: String!){
+  addApproval(postUuid: $postUuid, username: $username) {
+    approval {
+      name
+    }
+  }
+}

@@ -1,11 +1,30 @@
 query getRandomPost {
-      randomPost {
-      uuid
-      PublishDate
-      Title
-      Text
-      Photo
-      Tags
-      Category
+  randomPost {
+    uuid
+    PublishDate
+    Title
+    Text
+    Photo
+    Tags
+  	Owner {
+      username
+      photo
     }
+    Category
+    Approvals {
+      name
+    }
+    Declines {
+      name
+    }
+    Comments {
+      name
+      user {
+        username
+      }
+      Time
+      Text
+    }
+    
+  }
 }

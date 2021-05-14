@@ -11,6 +11,10 @@ export default {
         size: {
             type: String,
             default: "sm"
+        },
+        photo: {
+            type: String,
+            default: "/images/userdefault.png"
         }
     },
     computed: {
@@ -18,7 +22,7 @@ export default {
             return `circle ${this.size}`
         },
         source(){
-            return `http://127.0.0.1:8000/media/${this.$store.state.user2.photo}` || "http://127.0.0.1:8000/media/images/unknown_yL1rdRV.png";
+            return `http://127.0.0.1:8000/media/${this.photo}` || "http://127.0.0.1:8000/media/images/unknown_yL1rdRV.png";
         }
     }    
     }

@@ -3,7 +3,7 @@
         <h1> {{title}} </h1>
         <div class="SectionContainer">
             <div class="Comments">
-                <Comment v-for="fragment in information" :key="fragment.uuid" :fragment="fragment" /> 
+                <Comment v-for="fragment in information" :key="fragment.name" :fragment="fragment" :title="title" /> 
             </div>
             <div class="ButtonSlot">
                 <slot/>

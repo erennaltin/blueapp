@@ -32,7 +32,8 @@ export default {
 
 .false {
     max-width: 550px;
-    min-width: 360px;
+    /* min-width: 360px; */
+    width: 550px;
     
 }
 

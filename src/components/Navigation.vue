@@ -5,7 +5,7 @@
             <li><router-link to="/Home"> Home </router-link></li>
             <li><router-link to="/profile"> Profile </router-link></li>
             <li><router-link to="#"> Top </router-link></li>
-            <li><router-link to="#"> Make a statement </router-link></li>
+            <li><router-link to="Create"> Make a statement </router-link></li>
         
         </ul>
     </div>

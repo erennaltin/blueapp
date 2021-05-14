@@ -1,6 +1,6 @@
 <template>
     <div class="addComment">
-        <input type="text" v-model="newComment" placeholder="You had a great point!" />
+        <input type="text" maxlength="50" v-model="newComment" placeholder="You had a great point!" />
         <button type="submit"> <SendComment /> </button> 
     </div>
 </template>

@@ -21,7 +21,11 @@ export default createStore({
       PublishDate: "Loading",
       Title: "Loading",
       Text: "Loading",
-      Photo: "http://127.0.0.1:8000/media/images/default.png",
+      Photo: "/images/default.png",
+      Owner: {
+        username: "loading",
+        photo: "/images/userdefault.png"
+      },
       Tags: "Loading",
       Category: "Loading"
     },

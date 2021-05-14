@@ -1,0 +1,7 @@
+mutation removeApproval($postUuid: String!, $username: String!) {
+  removeApproval(postUuid: $postUuid, username: $username) {
+    decline {
+      name
+    }
+  }
+}

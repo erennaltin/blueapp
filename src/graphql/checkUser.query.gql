@@ -3,5 +3,8 @@ query checkUser {
         username
         bio
         photo
+        Approvals {
+            name
+        }
     }
 }

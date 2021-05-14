@@ -1,9 +1,9 @@
 <template>
     <div :class="HeaderClass">
         <div class="Informations">
-            <ProfileCircle class="sm" />
+            <ProfileCircle :photo="InitialPost ? InitialPost.Owner.photo : ''" class="sm" />
             <div class="PostInformations">
-                <h1> {{user2.username}} </h1>
+                <h1> {{InitialPost ? InitialPost.Owner.username : 'loading...'}} </h1>
                 <h3> {{ PublishDate || homePost.PublishDate}} </h3>
             </div>
         </div>
@@ -43,7 +43,7 @@ export default {
             this.InitialPost;
             let date = this.InitialPost.PublishDate.slice(0,10)
             let clock = this.InitialPost.PublishDate.slice(11,16)
-            return `${date} - ${clock}`
+            return `${date} - ${clock} UTC`
         }
 
     },

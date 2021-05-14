@@ -1,0 +1,5 @@
+query checkApproval($name: String!){
+  approval(name: $name){
+    name
+  }
+}

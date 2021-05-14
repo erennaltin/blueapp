@@ -3,9 +3,13 @@
         <profile-circle size="sm"/>
         <div class="Container">
             <p> {{fragment.Text}} </p>
-            <div class="Informations"> 
+            <div v-if="title === 'Objections'" class="Informations"> 
                 <p> {{fragment.Owner}} </p>
                 <p> {{fragment.PublishDate}} </p>
+            </div>
+            <div v-if="title === 'Comments'" class="Informations"> 
+                <p> {{fragment.user.username}} </p>
+                <p> {{PublishDate}} </p>
             </div>
         </div>
     </div>
@@ -20,7 +24,15 @@ export default {
     },
     props: {
         fragment: Object,
+        title: String,
     }, 
+    computed: {
+         PublishDate() {
+            let date = this.fragment.Time.slice(0,10)
+            let clock = this.fragment.Time.slice(11,16)
+            return `${date} - ${clock} UTC`
+        }
+    }
 }
 </script>
 
