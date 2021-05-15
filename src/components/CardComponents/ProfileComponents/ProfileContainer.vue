@@ -34,7 +34,6 @@ export default {
       username: route.params.slug,
     }));
     const User = useResult(result, null);
-
     return { store, user, loading, User };
   },
 };

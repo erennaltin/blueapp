@@ -1,11 +1,22 @@
 <template>
   <div class="Home">
-    <CardContainer :class="ContainerClass" :ContainerMode="ContainerMode" id="card1">
-      <HomeContainer
-        :ContainerMode="ContainerMode"
-        :changeContainerMode="changeContainerMode"
-      />
-    </CardContainer>
+    <div class="ArrowContainer">
+      <right-arrow v-if="!ContainerMode" @click="reload">
+        ←
+        <span class="text">See new</span>
+      </right-arrow>
+
+      <CardContainer :class="ContainerClass" :ContainerMode="ContainerMode" id="card1">
+        <HomeContainer
+          :ContainerMode="ContainerMode"
+          :changeContainerMode="changeContainerMode"
+        />
+      </CardContainer>
+      <right-arrow @click="changeContainerMode" v-if="!ContainerMode">
+        <span class="text">See detail</span>
+        →
+      </right-arrow>
+    </div>
     <div class="ControlButtons">
       <ControlButton Component="Approve" v-if="Mode !== 'Approve'" @click="addApprove" />
       <ControlButton
@@ -38,8 +49,10 @@ import removeApproveMutation from "@/graphql/removeApproval.mutation.gql";
 import checkApprovalQuery from "@/graphql/checkApproval.query.gql";
 import checkDeclineQuery from "@/graphql/checkDecline.query.gql";
 
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
+import RightArrow from "../components/CardComponents/HomeComponents/rightArrow.vue";
 
 export default {
   name: "Home",
@@ -47,6 +60,7 @@ export default {
     CardContainer,
     ControlButton,
     HomeContainer,
+    RightArrow,
   },
   computed: {
     ContainerClass() {
@@ -68,14 +82,23 @@ export default {
         this.PostClassifier = "Vertical";
       }
     },
+    reload() {
+      location.reload();
+    },
   },
   setup() {
-    const Mode = ref("");
-    const { result, loading } = useQuery(getRandomPostQuery);
+    const route = useRoute();
+    const slug = route.params.slug;
+
+    const { result, loading } = useQuery(getRandomPostQuery, () => ({
+      uuid: slug,
+    }));
     const RandomPost = useResult(result, {}, (data) => data.randomPost);
     const store = useStore();
+    const Mode = computed(() => store.state.Mode);
 
     const getPost = (post) => store.dispatch("getPost", post);
+    const changeMode = (payload) => store.dispatch("changeMode", payload);
 
     const post = ref(store.state.InitialPost);
     const user = ref(store.state.user2);
@@ -95,7 +118,7 @@ export default {
     }));
 
     onDone(() => {
-      Mode.value = "Approve";
+      changeMode({ Mode: "Approve" });
     });
 
     const { result: checkApproval, loading: checkLoading } = useQuery(
@@ -107,7 +130,7 @@ export default {
     const ifApproval = useResult(checkApproval);
     watch(checkLoading, () => {
       if (ifApproval.value.name === "True") {
-        Mode.value = "Approve";
+        changeMode({ Mode: "Approve" });
       }
     });
 
@@ -120,7 +143,7 @@ export default {
     const ifDecline = useResult(checkDecline);
     watch(checkDeclineLoading, () => {
       if (ifDecline.value.name === "True") {
-        Mode.value = "Decline";
+        changeMode({ Mode: "Decline" });
       }
     });
 
@@ -135,7 +158,7 @@ export default {
     );
 
     Remove(() => {
-      Mode.value = "Decline";
+      changeMode({ Mode: "Decline" });
     });
 
     return { RandomPost, Mode, addApprove, post, user, ifApproval, removeApprove };
@@ -145,13 +168,19 @@ export default {
 
 <style scoped>
 .Home {
-  @apply flex flex-col items-center justify-center
-  overflow-hidden;
+  @apply flex flex-col items-center justify-center;
 }
 
+.ArrowContainer {
+  @apply flex items-center;
+}
 .ControlButtons {
-  @apply flex justify-between mt-4;
+  @apply flex justify-between mt-4 overflow-hidden;
   max-width: 650px;
   min-width: 550px;
+}
+
+.text {
+  @apply text-2xl;
 }
 </style>

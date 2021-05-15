@@ -9,10 +9,7 @@
     <h1>Statements</h1>
     <hr />
     <div class="Statements">
-      <StatementFragment />
-      <StatementFragment />
-      <StatementFragment />
-      <StatementFragment />
+      <StatementFragment v-for="post in posts" :key="post.Title" :post="post" />
     </div>
     <div class="SettingContainer">
       <Settings class="Settings" />
@@ -24,6 +21,8 @@
 import ProfileSummary from "./ProfileSummary.vue";
 import StatementFragment from "./StatementFragment.vue";
 import Settings from "@/assets/Icons/Settings.svg";
+import getPostByUsernameQuery from "@/graphql/getPostByUsername.query.gql";
+import { useQuery, useResult } from "@vue/apollo-composable";
 
 export default {
   name: "ProfileSection",
@@ -59,6 +58,14 @@ export default {
         this.seeMore = "More";
       }
     },
+  },
+  setup(props) {
+    const { result } = useQuery(getPostByUsernameQuery, () => ({
+      username: props.user.username,
+    }));
+    const posts = useResult(result, []);
+
+    return { posts };
   },
 };
 </script>

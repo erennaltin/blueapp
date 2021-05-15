@@ -1,0 +1,21 @@
+query getPost($username: String!) {
+  posts(Owner: $username) {
+    uuid
+    PublishDate
+    Title
+    Photo
+  	Owner {
+      username
+    }
+    Category
+    Approvals {
+      name
+    }
+    Declines {
+      name
+    }
+    Comments {
+      name
+  }
+}
+}

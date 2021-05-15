@@ -1,0 +1,7 @@
+mutation removePost($uuid:String!) {
+  removePost(postUuid: $uuid) {
+    post {
+      uuid
+    }
+  }
+}

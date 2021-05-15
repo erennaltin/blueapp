@@ -27,4 +27,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - Cache Update'i yapılmıyor.
 
 ### Yapılacaklar
-- 
+- Objection
+- Fotoğraf Yükleme
+- Üye Aktivasyonu

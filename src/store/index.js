@@ -31,7 +31,8 @@ export default createStore({
     },
     isAuth: false,
     initial: true,
-    serverMedia: "http://127.0.0.1:8000/media/"
+    serverMedia: "http://127.0.0.1:8000/media/",
+    Mode: ''
   },
   mutations: {
     updateUser (state,payload) {
@@ -44,6 +45,9 @@ export default createStore({
     deleteCom(state,payload) {
       state.InitialPost.Comments.splice(payload.index, 1);
       console.log(state.InitialPost)
+    },
+    changeModeMutation(state, payload) {
+      state.Mode = payload.Mode
     }
   },
   actions: {
@@ -55,6 +59,9 @@ export default createStore({
     },
     deleteComment({commit}, comment) {
       commit('deleteCom', comment)
+    },
+    changeMode({commit}, payload) {
+      commit('changeModeMutation', payload)
     }
   },
   modules: {

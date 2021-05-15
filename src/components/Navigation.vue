@@ -2,10 +2,9 @@
   <div class="ControlPanel">
     <h1>BLUE</h1>
     <ul>
-      <li><router-link to="/Home">Home</router-link></li>
+      <li><router-link to="/Home/discover">Home</router-link></li>
       <li @click="goToProfile"><router-link to="#">Profile</router-link></li>
-      <li><router-link to="#">Top</router-link></li>
-      <li><router-link to="Create">Make a statement</router-link></li>
+      <li @click="goToCreate"><router-link to="#">Make a statement</router-link></li>
     </ul>
   </div>
 </template>
@@ -26,8 +25,11 @@ export default {
       const user = store.state.user2;
       router.replace(`/profile/` + user.username);
     };
+    const goToCreate = () => {
+      router.replace("/create");
+    };
 
-    return { goToProfile };
+    return { goToProfile, goToCreate };
   },
 };
 </script>
