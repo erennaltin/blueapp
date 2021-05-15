@@ -1,10 +1,10 @@
 <template>
-    <div class="ProfileSummary">
-        <ProfileCircle size="xl" />
-        <div class="informations">
-            <h1> Eren Altın </h1>
-            <h3> @erennaltin </h3>
-            <div class="FollowingArea">
+  <div class="ProfileSummary">
+    <ProfileCircle size="xl" :photo="user.photo" />
+    <div class="informations">
+      <h1>{{ `${user.firstName} ${user.lastName}` }}</h1>
+      <h3>{{ `@${user.username}` }}</h3>
+      <!-- <div class="FollowingArea">
                 <div class="Follow">
                     <h1> 200 </h1>
                     <p> Followers </p>
@@ -13,48 +13,51 @@
                     <h1> 200 </h1>
                     <p> Following </p>
                 </div>  
-            </div>
-        </div>
+            </div> -->
     </div>
+  </div>
 </template>
 
 <script>
-import ProfileCircle from '../../ProfileCircle.vue'
+import ProfileCircle from "../../ProfileCircle.vue";
 export default {
-    name: "ProfileSummary",
-    components: {
-        ProfileCircle
-    },
-}
+  name: "ProfileSummary",
+  components: {
+    ProfileCircle,
+  },
+  props: {
+    user: Object,
+  },
+};
 </script>
 
 <style scoped>
 .ProfileSummary {
-    @apply flex items-center ml-4 mt-4;
+  @apply flex items-center ml-4 mt-4;
 }
 
 .informations {
-    @apply ml-4;
+  @apply ml-4;
 }
 
 h1 {
-    @apply font-bold text-lg;
+  @apply font-bold text-lg;
 }
 
 h3 {
-    @apply font-semibold opacity-40;
+  @apply font-semibold opacity-40;
 }
 
 .FollowingArea {
-    @apply flex;
+  @apply flex;
 }
 
 .Follow {
-    @apply mr-4
-    flex justify-center items-center; 
+  @apply mr-4
+    flex justify-center items-center;
 }
 
 .Follow h1 {
-    @apply mr-1;
+  @apply mr-1;
 }
 </style>

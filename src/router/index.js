@@ -32,7 +32,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/profile',
+    path: '/profile/:slug',
     name: 'Profile',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

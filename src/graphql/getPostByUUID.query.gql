@@ -1,5 +1,5 @@
-query getRandomPost {
-  randomPost {
+query getPost($uuid: String!) {
+  posts(uuid: $uuid) {
     uuid
     PublishDate
     Title
@@ -19,16 +19,15 @@ query getRandomPost {
     }
     Comments {
       name
-      post {
-        uuid
-      }
       user {
         username
         photo
       }
+      post {
+        uuid
+      }
       Time
       Text
     }
-    
   }
 }

@@ -44,7 +44,12 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 const defaultClient = new ApolloClient({
     link: authMiddleware.concat(httpLink),
     cache: new InMemoryCache(),
-    connectToDevTools: true
+    connectToDevTools: true,
+    defaultOptions: {
+      $query: {
+        fetchPolicy: 'network-only'
+      },
+    }
 })
 
 export default defaultClient;

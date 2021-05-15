@@ -40,6 +40,10 @@ export default createStore({
     },
     updatePost(state,payload) {
       state.InitialPost = payload
+    },
+    deleteCom(state,payload) {
+      state.InitialPost.Comments.splice(payload.index, 1);
+      console.log(state.InitialPost)
     }
   },
   actions: {
@@ -48,6 +52,9 @@ export default createStore({
     },
     getPost ({commit}, post) {
       commit('updatePost', post)
+    },
+    deleteComment({commit}, comment) {
+      commit('deleteCom', comment)
     }
   },
   modules: {

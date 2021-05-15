@@ -1,0 +1,13 @@
+mutation removeComment($name: String!) {
+  removeComment(name: $name) {
+    comment {
+     name
+      user {
+        username
+        photo
+      }
+      Time
+      Text
+    }
+  }
+}

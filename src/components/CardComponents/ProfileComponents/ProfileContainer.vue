@@ -1,117 +1,52 @@
 <template>
-    <div class="ProfileContainer">
-        <ProfileSection />
-        <SectionContainer title="Objections" :information="Comments" />
-        <SectionContainer title="Supported Statements" :information="Comments" isLast="last"/>
-    </div>
+  <div class="ProfileContainer">
+    <ProfileSection :user="User || user" />
+    <SectionContainer title="Objections" />
+    <SectionContainer
+      v-if="!loading"
+      title="Supported Statements"
+      :information="User.Approvals"
+      isLast="last"
+    />
+  </div>
 </template>
 
 <script>
-import SectionContainer from '../SectionContainer.vue'
-import ProfileSection from './ProfileSection.vue'
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
+import { useQuery, useResult } from "@vue/apollo-composable";
+import getProfileQuery from "@/graphql/getProfile.query.gql";
+import SectionContainer from "../SectionContainer.vue";
+import ProfileSection from "./ProfileSection.vue";
 export default {
-    name: "ProfileContainer",        
-    components: {
-        ProfileSection,
-        SectionContainer
-        },
-    data(){
-        return {
-            Comments: [{
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },
-            {
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },{
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },{
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },{
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },{
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },{
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },{
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },{
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },{
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },{
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },{
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },{
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },{
-                uuid: "ec939b54-5eba-4be0-b0a9-43519a733450",
-                Owner: "krdnzli61",
-                PublishDate: "21.04.2021 - 20:04",
-                Text: "This is a comment!",
-                Belong: "e046fbe0-a294-11eb-ba6c-59c7298c9eef",
-            },]
-        }
-    }
-}
+  name: "ProfileContainer",
+  components: {
+    ProfileSection,
+    SectionContainer,
+  },
+  setup() {
+    const store = useStore();
+    // const Approvals = store.state.user2.Approvals;
+    const user = store.state.user2;
+
+    const route = useRoute();
+    const { result, loading } = useQuery(getProfileQuery, () => ({
+      username: route.params.slug,
+    }));
+    const User = useResult(result, null);
+
+    return { store, user, loading, User };
+  },
+};
 </script>
 
 <style scoped>
 .ProfileContainer {
-    @apply flex;
-    border-radius: 2rem;
+  @apply flex;
+  border-radius: 2rem;
 }
-
 </style>
+
+setup() { const route = useRoute(); const { result, loading } = useQuery(getProfileQuery,
+() => ({ username: route.params.slug, })); const User = useResult(result, null, (data) =>
+data.accounts); console.log(User); return { route, loading, User }; },

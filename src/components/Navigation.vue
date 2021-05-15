@@ -1,26 +1,40 @@
 <template>
-    <div class="ControlPanel">
-        <h1> BLUE </h1>
-        <ul>
-            <li><router-link to="/Home"> Home </router-link></li>
-            <li><router-link to="/profile"> Profile </router-link></li>
-            <li><router-link to="#"> Top </router-link></li>
-            <li><router-link to="Create"> Make a statement </router-link></li>
-        
-        </ul>
-    </div>
+  <div class="ControlPanel">
+    <h1>BLUE</h1>
+    <ul>
+      <li><router-link to="/Home">Home</router-link></li>
+      <li @click="goToProfile"><router-link to="#">Profile</router-link></li>
+      <li><router-link to="#">Top</router-link></li>
+      <li><router-link to="Create">Make a statement</router-link></li>
+    </ul>
+  </div>
 </template>
 
 <script>
+// import { computed } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+// import { useRoute } from "vue-router";
 export default {
-    name: "Navigation"        
+  name: "Navigation",
+  setup() {
+    // const route = useRoute();
+    const store = useStore();
+    const router = useRouter();
 
-    }
+    const goToProfile = () => {
+      const user = store.state.user2;
+      router.replace(`/profile/` + user.username);
+    };
+
+    return { goToProfile };
+  },
+};
 </script>
 
 <style scoped>
 .ControlPanel {
-    @apply text-white
+  @apply text-white
     flex
     h-14 w-full
     items-center
@@ -28,19 +42,19 @@ export default {
 }
 
 .ControlPanel ul {
-    @apply flex
+  @apply flex
     ml-2
     justify-self-end;
 }
 
 .ControlPanel ul li {
-    @apply ml-8
+  @apply ml-8
     text-xl
     font-semibold;
 }
 
 h1 {
-    @apply text-3xl
+  @apply text-3xl
     font-bold;
 }
 </style>
