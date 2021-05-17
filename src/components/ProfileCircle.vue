@@ -22,12 +22,12 @@ export default {
       return `circle ${this.size}`;
     },
     serverMedia() {
-      return this.$store.state.serverMedia
-    }
+      return this.$store.state.serverMedia;
+    },
     source() {
       return (
         `${this.serverMedia}${this.photo}` ||
-        "https://bluebackend.herokuapp.com/media/userdefault.png""
+        "https://bluebackend.herokuapp.com/media/userdefault.png"
       );
     },
   },
