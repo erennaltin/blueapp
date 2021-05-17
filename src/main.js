@@ -37,7 +37,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 //    });
 
    const httpLink = new HttpLink({
-     uri: 'http://127.0.0.1:8000/graphql',
+     uri: 'https://bluebackend.herokuapp.com/graphql',
    });
 
 
