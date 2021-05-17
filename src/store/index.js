@@ -44,7 +44,6 @@ export default createStore({
     },
     deleteCom(state,payload) {
       state.InitialPost.Comments.splice(payload.index, 1);
-      console.log(state.InitialPost)
     },
     changeModeMutation(state, payload) {
       state.Mode = payload.Mode

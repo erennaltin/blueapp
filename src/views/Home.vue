@@ -104,7 +104,6 @@ export default {
     const user = ref(store.state.user2);
 
     watch(loading, () => {
-      console.log(RandomPost.value);
       getPost(RandomPost.value);
       post.value = store.state.InitialPost;
       user.value = store.state.user2;
@@ -141,9 +140,7 @@ export default {
       })
     );
     const ifDecline = useResult(checkDecline);
-    console.log(ifDecline);
     watch(DeclineLoading, () => {
-      // console.log(ifDecline);
       if (ifDecline.value.name === "True") {
         changeMode({ Mode: "Decline" });
       }
