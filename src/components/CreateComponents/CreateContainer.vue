@@ -86,7 +86,7 @@ export default {
           Text: Text.value,
           Tags: Tags.value,
           Category: Category.value,
-          Photo: "/images/default.png",
+          Photo: "default.png",
           ObjectionTo: "00000000-0000-0000-0000-000000000000",
         },
       },
