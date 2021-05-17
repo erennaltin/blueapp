@@ -92,7 +92,7 @@ export default {
       },
     }));
     onDone((result) => {
-      router.push("/Home/" + result.data.addPost.post.uuid);
+      router.push("/home/" + result.data.addPost.post.uuid);
     });
 
     return { Title, Text, Category, Tags, nextStep, step, CreatePost };

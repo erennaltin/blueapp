@@ -14,7 +14,7 @@ const routes = [
     component: index
   },
   {
-    path: '/Login',
+    path: '/login',
     name: 'Login',
     component: LoginPage
   },
@@ -27,7 +27,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "signup" */ '../views/SignPage.vue')
   },
   {
-    path: '/Home/:slug',
+    path: '/home/:slug',
     name: 'Home',
     component: Home
   },
@@ -59,10 +59,16 @@ router.beforeEach((to, from) => {
     query: checkUserQuery
   }).then((res) => {
     if(to.fullPath === "/login" && res.data.me !== null || to.fullPath === "/signup" && res.data.me !== null) {
-      router.replace("/Home/discover")
+      router.replace("/home/discover")
     }
     else if(res.data.me === null && to.fullPath !== "/login" && from.fullPath !== "/login" && to.fullPath !== "/signup") {
       router.replace('/login')
+    }
+    else if(res.data.me !== null && to.fullPath === "/home" || res.data.me !== null && to.fullPath === "/home/") {
+      router.replace("/home/discover")
+      setTimeout(() => {
+        location.reload()
+      }, 100);
     }
     else if(res.data.me !== null) {
       store.dispatch('getUser', res.data.me)

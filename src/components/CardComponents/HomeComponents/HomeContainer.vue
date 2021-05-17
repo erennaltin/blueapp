@@ -74,57 +74,6 @@ export default {
   data() {
     return {
       PostClassifier: "Vertical",
-
-      Objections: [
-        {
-          uuid: "f1cd7ff5-489f-4957-8186-41fec0f65fca",
-          Owner: "slmbnobjection",
-          Text: "Police Department has degenerated!",
-          PublishDate: "21.04.2021 - 16:21",
-        },
-        {
-          uuid: "f1cd7ff5-489f-4957-8186-41fec0f65fca",
-          Owner: "slmbnobjection",
-          Text: "Police Department has degenerated!",
-          PublishDate: "21.04.2021 - 16:21",
-        },
-        {
-          uuid: "f1cd7ff5-489f-4957-8186-41fec0f65fca",
-          Owner: "slmbnobjection",
-          Text: "Police Department has degenerated!",
-          PublishDate: "21.04.2021 - 16:21",
-        },
-        {
-          uuid: "f1cd7ff5-489f-4957-8186-41fec0f65fca",
-          Owner: "slmbnobjection",
-          Text: "Police Department has degenerated!",
-          PublishDate: "21.04.2021 - 16:21",
-        },
-        {
-          uuid: "f1cd7ff5-489f-4957-8186-41fec0f65fca",
-          Owner: "slmbnobjection",
-          Text: "Police Department has degenerated!",
-          PublishDate: "21.04.2021 - 16:21",
-        },
-        {
-          uuid: "f1cd7ff5-489f-4957-8186-41fec0f65fca",
-          Owner: "slmbnobjection",
-          Text: "Police Department has degenerated!",
-          PublishDate: "21.04.2021 - 16:21",
-        },
-        {
-          uuid: "f1cd7ff5-489f-4957-8186-41fec0f65fca",
-          Owner: "slmbnobjection",
-          Text: "Police Department has degenerated!",
-          PublishDate: "21.04.2021 - 16:21",
-        },
-        {
-          uuid: "f1cd7ff5-489f-4957-8186-41fec0f65fca",
-          Owner: "slmbnobjection",
-          Text: "Police Department has degenerated!",
-          PublishDate: "21.04.2021 - 16:21",
-        },
-      ],
     };
   },
   watch: {

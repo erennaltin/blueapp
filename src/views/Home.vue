@@ -134,14 +134,16 @@ export default {
       }
     });
 
-    const { result: checkDecline, loading: checkDeclineLoading } = useQuery(
+    const { result: checkDecline, loading: DeclineLoading } = useQuery(
       checkDeclineQuery,
       () => ({
         name: post.value.uuid + "+" + user.value.username,
       })
     );
     const ifDecline = useResult(checkDecline);
-    watch(checkDeclineLoading, () => {
+    console.log(ifDecline);
+    watch(DeclineLoading, () => {
+      // console.log(ifDecline);
       if (ifDecline.value.name === "True") {
         changeMode({ Mode: "Decline" });
       }

@@ -3,7 +3,7 @@ module.exports = {
       service: {
         name: 'my-app',
         // URL to the GraphQL API
-        url: 'http://127.0.0.1:8000/graphql',
+        url: 'https://bluebackend.herokuapp.com/graphql',
       },
       // Files processed by the extension
       includes: [

@@ -2,7 +2,7 @@
   <div class="ControlPanel">
     <h1>BLUE</h1>
     <ul>
-      <li><router-link to="/Home/discover">Home</router-link></li>
+      <li><router-link to="/home/discover">Home</router-link></li>
       <li @click="goToProfile"><router-link to="#">Profile</router-link></li>
       <li @click="goToCreate"><router-link to="#">Make a statement</router-link></li>
     </ul>
