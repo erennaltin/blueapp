@@ -14,17 +14,20 @@ export default {
     },
     photo: {
       type: String,
-      default: "/images/userdefault.png",
+      default: "userdefault.png",
     },
   },
   computed: {
     className: function () {
       return `circle ${this.size}`;
     },
+    serverMedia() {
+      return this.$store.state.serverMedia
+    }
     source() {
       return (
-        `http://127.0.0.1:8000/media/${this.photo}` ||
-        "http://127.0.0.1:8000/media/images/unknown_yL1rdRV.png"
+        `${this.serverMedia}${this.photo}` ||
+        "https://bluebackend.herokuapp.com/media/userdefault.png""
       );
     },
   },

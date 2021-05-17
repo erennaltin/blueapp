@@ -3,16 +3,16 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     user: {
-      profilePicture: "https://random.imagecdn.app/200/200",
+      profilePicture: "",
       Username: "erennaltin"
     },
-    user2: {username: "loading", photo: "/images/userdefault.png"},
+    user2: {username: "loading", photo: "userdefault.png"},
     homePost: {
       uuid: "Loading",
       PublishDate: "Loading",
       Title: "Loading",
       Text: "Loading",
-      Photo: "http://127.0.0.1:8000/media/images/default.png",
+      Photo: "https://bluebackend.herokuapp.com/media/default.png",
       Tags: "Loading",
       Category: "Loading"
     },
@@ -21,17 +21,17 @@ export default createStore({
       PublishDate: "Loading",
       Title: "Loading",
       Text: "Loading",
-      Photo: "/images/default.png",
+      Photo: "default.png",
       Owner: {
         username: "loading",
-        photo: "/images/userdefault.png"
+        photo: "userdefault.png"
       },
       Tags: "Loading",
       Category: "Loading"
     },
     isAuth: false,
     initial: true,
-    serverMedia: "http://127.0.0.1:8000/media/",
+    serverMedia: "https://bluebackend.herokuapp.com/media/",
     Mode: ''
   },
   mutations: {

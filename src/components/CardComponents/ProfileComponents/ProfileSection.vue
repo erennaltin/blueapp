@@ -12,7 +12,7 @@
       <StatementFragment v-for="post in posts" :key="post.Title" :post="post" />
     </div>
     <div class="SettingContainer">
-      <Settings class="Settings" />
+      <p @click="logout" class="Settings">Logout</p>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@
 <script>
 import ProfileSummary from "./ProfileSummary.vue";
 import StatementFragment from "./StatementFragment.vue";
-import Settings from "@/assets/Icons/Settings.svg";
+// import Settings from "@/assets/Icons/Settings.svg";
 import getPostByUsernameQuery from "@/graphql/getPostByUsername.query.gql";
 import { useQuery, useResult } from "@vue/apollo-composable";
 
@@ -29,7 +29,7 @@ export default {
   components: {
     ProfileSummary,
     StatementFragment,
-    Settings,
+    // Settings,
   },
   data() {
     return {
@@ -65,7 +65,12 @@ export default {
     }));
     const posts = useResult(result, []);
 
-    return { posts };
+    const logout = () => {
+      localStorage.removeItem("token");
+      setTimeout(() => location.reload(), 100);
+    };
+
+    return { posts, logout };
   },
 };
 </script>
@@ -101,7 +106,7 @@ h1 {
 }
 
 .Settings {
-  @apply w-8 mr-4;
+  @apply w-8 mr-8 font-bold text-red-500 cursor-pointer;
 }
 
 .SettingContainer {

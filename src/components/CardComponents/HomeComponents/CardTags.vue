@@ -58,7 +58,9 @@ export default {
     }));
 
     onDone(() => {
-      router.push("/Home/discover");
+      router.replace("/Home/discover");
+
+      setTimeout(() => location.reload(), 100);
     });
     return { removePost, slug, user };
   },
@@ -89,6 +91,7 @@ export default {
   @apply w-8
     col-start-4
     justify-self-end
-    mr-4;
+    mr-4
+    cursor-pointer;
 }
 </style>

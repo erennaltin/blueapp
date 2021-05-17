@@ -29,4 +29,3 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Yapılacaklar
 - Objection
 - Fotoğraf Yükleme
-- Üye Aktivasyonu
