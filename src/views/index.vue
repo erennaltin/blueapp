@@ -1,5 +1,6 @@
 <template>
   <div @load="getUser(user)" class="Check"></div>
+  <p>Redirecting...</p>
 </template>
 
 <script>
@@ -14,8 +15,6 @@ export default {
   setup() {
     const router = useRouter();
     const store = useStore();
-    // const route = useRoute()
-    console.log(router);
     const getUser = (user) => store.dispatch("getUser", user);
     const { result, loading } = useQuery(checkUserQuery);
     const user = useResult(result, null, (data) => data.me);
@@ -28,13 +27,6 @@ export default {
         router.push("/Home/discover");
       }
     });
-    // if(user.value === null) {
-    //     console.log(user.value)
-    //     router.push('/login')
-    // }
-    // else {
-    //     router.back()
-    // }
 
     return {
       store,
