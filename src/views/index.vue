@@ -1,6 +1,5 @@
 <template>
   <div @load="getUser(user)" class="Check"></div>
-  <p>Redirecting...</p>
 </template>
 
 <script>
@@ -24,7 +23,7 @@ export default {
         router.push("/login");
       } else {
         getUser(user);
-        router.push("/Home/discover");
+        router.push("/home/discover");
       }
     });
 

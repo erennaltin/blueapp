@@ -5,7 +5,10 @@ import router from './router'
 import store from './store'
 import './index.css'
 import { ApolloClient, InMemoryCache, HttpLink, ApolloLink} from '@apollo/client'
-import {DefaultApolloClient} from '@vue/apollo-composable'
+import { createUploadLink } from 'apollo-upload-client'
+import {DefaultApolloClient } from '@vue/apollo-composable'
+import { RetryLink } from '@apollo/client/link/retry';
+
 
 const authMiddleware = new ApolloLink((operation, forward) => {
     // add the authorization to the headers
@@ -36,13 +39,21 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 //      headers: getHeaders()
 //    });
 
+
    const httpLink = new HttpLink({
      uri: 'https://bluebackend.herokuapp.com/graphql',
    });
 
 
+   const links = new RetryLink().split(
+    operation => operation.getContext().hasUpload,
+    createUploadLink({
+      uri: 'https://bluebackend.herokuapp.com/graphql'
+    }),
+    httpLink
+  )
 const defaultClient = new ApolloClient({
-    link: authMiddleware.concat(httpLink),
+    link: authMiddleware.concat(links),
     cache: new InMemoryCache(),
     connectToDevTools: true,
     defaultOptions: {

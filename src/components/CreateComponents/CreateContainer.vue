@@ -33,7 +33,8 @@
         />
       </div>
       <div v-if="step === 2">
-        <p>We are working on uploading photos!</p>
+        <label>Choose a photo!</label>
+        <input type="file" @change="uploadPhoto" id="uploadInput" />
       </div>
       <input type="submit" value="Create" v-if="step === 2" />
       <input type="button" @click="nextStep" value="Next" v-else />
@@ -45,8 +46,11 @@
 import { ref } from "vue";
 import { useMutation } from "@vue/apollo-composable";
 import createPostMutation from "@/graphql/createPost.mutation.gql";
+import uploadPhotoMutation from "@/graphql/uploadPhoto.mutation.gql";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import defaultClient from "@/main.js";
+
 export default {
   name: "CreateContainer",
   components: {},
@@ -58,6 +62,7 @@ export default {
     const Tags = ref("");
     const store = useStore();
     const router = useRouter();
+    const photo = ref("");
 
     const nextStep = () => {
       if (step.value === 0 && Title.value !== "" && Text.value !== "") {
@@ -86,7 +91,7 @@ export default {
           Text: Text.value,
           Tags: Tags.value,
           Category: Category.value,
-          Photo: "default.png",
+          Photo: photo.value,
           ObjectionTo: "00000000-0000-0000-0000-000000000000",
         },
       },
@@ -95,7 +100,42 @@ export default {
       router.push("/home/" + result.data.addPost.post.uuid);
     });
 
-    return { Title, Text, Category, Tags, nextStep, step, CreatePost };
+    // const { mutate: upload, onDone: uploaded } = useMutation(
+    //   uploadPhotoMutation,
+    //   (file) => ({
+    //     variables: {
+    //       username: "",
+    //       post_uuid: "",
+    //       file: file,
+    //     },
+    //   })
+    // );
+
+    // uploaded((result) => {
+    //   console.log(result);
+    // });
+
+    const uploadPhoto = ({ target: { files = [] } }) => {
+      if (!files.length) {
+        return;
+      }
+
+      defaultClient
+        .mutate({
+          mutation: uploadPhotoMutation,
+          variables: {
+            file: files[0],
+          },
+          context: {
+            hasUpload: true,
+          },
+        })
+        .then((data) => {
+          photo.value = data.data.uploadPhoto.name;
+        });
+    };
+
+    return { Title, Text, Category, Tags, nextStep, step, CreatePost, uploadPhoto };
   },
 };
 </script>

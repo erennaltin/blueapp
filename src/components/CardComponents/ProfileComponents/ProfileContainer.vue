@@ -45,7 +45,3 @@ export default {
   border-radius: 2rem;
 }
 </style>
-
-setup() { const route = useRoute(); const { result, loading } = useQuery(getProfileQuery,
-() => ({ username: route.params.slug, })); const User = useResult(result, null, (data) =>
-data.accounts); console.log(User); return { route, loading, User }; },
