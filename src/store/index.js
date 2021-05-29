@@ -6,7 +6,7 @@ export default createStore({
       profilePicture: "",
       Username: "erennaltin"
     },
-    user2: {username: "loading", photo: "https://bluebackend.herokuapp.com/graphql/media/userdefault.png"},
+    user2: {username: "loading", photo: "https://bluebackend.herokuapp.com/media/userdefault.png"},
     homePost: {
       uuid: "Loading",
       PublishDate: "Loading",
