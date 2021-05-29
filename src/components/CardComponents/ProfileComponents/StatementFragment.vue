@@ -1,8 +1,13 @@
 <template>
   <div class="StatementFragment" @click="goToPost">
     <div class="Review">
-      <img :src="serverMedia + post.Photo" />
-      <h1>{{ post.Title }}</h1>
+      <img :src="post.Photo" />
+      <div class="Title">
+        <h1>{{ post.Title }}</h1>
+        <h2 v-if="post.ObjectionTo !== '00000000-0000-0000-0000-000000000000'">
+          OBJECTION
+        </h2>
+      </div>
     </div>
     <div class="informations">
       <div class="informationFragment">
@@ -14,7 +19,7 @@
         <p>Declines</p>
       </div>
       <div class="informationFragment">
-        <h1>50</h1>
+        <h1>{{ post.Objections.totalCount }}</h1>
         <p>Objections</p>
       </div>
       <div class="informationFragment">
@@ -70,5 +75,13 @@ h1 {
 
 .informationFragment {
   @apply flex items-center;
+}
+
+.Title {
+  @apply flex justify-between items-center;
+}
+
+h2 {
+  @apply font-bold;
 }
 </style>

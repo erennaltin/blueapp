@@ -29,6 +29,18 @@ query getRandomPost($uuid: String!) {
       Time
       Text
     }
-    
+     Objections {
+      edges {
+        node {
+          PublishDate
+          Owner {
+            username
+            photo
+          }
+          Title
+          uuid
+        }
+      }
+    }
   }
 }

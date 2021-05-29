@@ -12,7 +12,14 @@
       <StatementFragment v-for="post in posts" :key="post.Title" :post="post" />
     </div>
     <div class="SettingContainer">
-      <p @click="logout" class="Settings">Logout</p>
+      <Settings
+        v-if="user.username === RealUser.username"
+        class="Settings"
+        @click="goUpdate"
+      />
+      <p @click="logout" v-if="user.username === RealUser.username" class="Settings">
+        Logout
+      </p>
     </div>
   </div>
 </template>
@@ -20,7 +27,7 @@
 <script>
 import ProfileSummary from "./ProfileSummary.vue";
 import StatementFragment from "./StatementFragment.vue";
-// import Settings from "@/assets/Icons/Settings.svg";
+import Settings from "@/assets/Icons/Settings.svg";
 import getPostByUsernameQuery from "@/graphql/getPostByUsername.query.gql";
 import { useQuery, useResult } from "@vue/apollo-composable";
 
@@ -29,7 +36,7 @@ export default {
   components: {
     ProfileSummary,
     StatementFragment,
-    // Settings,
+    Settings,
   },
   data() {
     return {
@@ -49,6 +56,9 @@ export default {
     loading() {
       return this.$store.state.user;
     },
+    RealUser() {
+      return this.$store.state.user2;
+    },
   },
   methods: {
     showMore() {
@@ -57,6 +67,9 @@ export default {
       } else {
         this.seeMore = "More";
       }
+    },
+    goUpdate() {
+      this.$router.push("/update");
     },
   },
   setup(props) {
@@ -110,7 +123,7 @@ h1 {
 }
 
 .SettingContainer {
-  @apply min-h-14 flex items-center justify-end border-t-2;
+  @apply min-h-14 ml-4 flex items-center justify-between border-t-2;
 }
 
 .textSummary {

@@ -1,11 +1,15 @@
 <template>
   <div class="ProfileContainer">
     <ProfileSection :user="User || user" />
-    <SectionContainer title="Objections" />
+    <SectionContainer
+      v-if="!loading"
+      title="Comments"
+      :information="User.Comments || []"
+    />
     <SectionContainer
       v-if="!loading"
       title="Supported Statements"
-      :information="User.Approvals"
+      :information="User.Approvals || []"
       isLast="last"
     />
   </div>
@@ -34,6 +38,7 @@ export default {
       username: route.params.slug,
     }));
     const User = useResult(result, null);
+    console.log(User);
     return { store, user, loading, User };
   },
 };

@@ -4,6 +4,7 @@ query getPost($username: String!) {
     PublishDate
     Title
     Photo
+    ObjectionTo
   	Owner {
       username
     }
@@ -14,8 +15,20 @@ query getPost($username: String!) {
     Declines {
       name
     }
-    Comments {
+     Comments {
       name
-  }
-}
+      post {
+        uuid
+      }
+      user {
+        username
+        photo
+      }
+      Time
+      Text
+    }
+    Objections {
+			totalCount
+    }
+} 
 }

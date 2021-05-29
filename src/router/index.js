@@ -46,6 +46,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "create" */ '../views/CreateStatement.vue')
+  },
+  {
+    path: '/update',
+    name: 'Update',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "update" */ '../views/UpdateProfile.vue')
   }
 ]
 
@@ -60,6 +68,9 @@ router.beforeEach((to, from) => {
   }).then((res) => {
     if(to.fullPath === "/login" && res.data.me !== null || to.fullPath === "/signup" && res.data.me !== null) {
       router.replace("/home/discover")
+    }
+    else if(res.data.me !== null && to.fullPath !== "/update" && res.data.me.firstName === ""){
+      router.replace("/update")
     }
     else if(res.data.me === null && to.fullPath !== "/login" && from.fullPath !== "/login" && to.fullPath !== "/signup") {
       router.replace('/login')

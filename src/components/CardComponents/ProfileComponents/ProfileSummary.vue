@@ -1,6 +1,6 @@
 <template>
   <div class="ProfileSummary">
-    <ProfileCircle size="xl" :photo="user.photo" />
+    <ProfileCircle class="ProfilePageCircle" size="xl" :photo="user.photo" username="" />
     <div class="informations">
       <h1>{{ `${user.firstName} ${user.lastName}` }}</h1>
       <h3>{{ `@${user.username}` }}</h3>
@@ -59,5 +59,9 @@ h3 {
 
 .Follow h1 {
   @apply mr-1;
+}
+
+.ProfilePageCircle {
+  @apply pointer-events-none;
 }
 </style>

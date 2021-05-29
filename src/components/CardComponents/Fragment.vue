@@ -8,6 +8,13 @@
       :photo="fragment.post.Owner.photo"
     />
     <profile-circle
+      @click="goProfile(fragment.node.Owner.username)"
+      class="touchable"
+      size="sm"
+      v-else-if="title === 'Objections'"
+      :photo="fragment.node.Owner.photo"
+    />
+    <profile-circle
       @click="goProfile(fragment.user.username)"
       class="touchable"
       size="sm"
@@ -23,10 +30,19 @@
         x
       </p>
       <p v-if="title === 'Supported Statements'">{{ fragment.post.Title }}</p>
+      <p
+        v-else-if="title === 'Objections'"
+        @click="goPost(fragment.node.uuid)"
+        class="touchable"
+      >
+        {{ fragment.node.Title }}
+      </p>
       <p v-else>{{ fragment.Text }}</p>
       <div v-if="title === 'Objections'" class="Informations">
-        <p>{{ fragment.Owner.username }}</p>
-        <p>{{ fragment.PublishDate }}</p>
+        <p @click="goProfile(fragment.node.Owner.username)" class="touchable">
+          {{ fragment.node.Owner.username }}
+        </p>
+        <p>{{ PublishDateObjection }}</p>
       </div>
       <div v-if="title === 'Comments'" class="Informations">
         <p @click="goProfile(fragment.user.username)" class="touchable">
@@ -68,10 +84,19 @@ export default {
       let clock = this.fragment.Time.slice(11, 16);
       return `${date} - ${clock} UTC`;
     },
+    PublishDateObjection() {
+      let date = this.fragment.node.PublishDate.slice(0, 10);
+      let clock = this.fragment.node.PublishDate.slice(11, 16);
+      return `${date} - ${clock} UTC`;
+    },
   },
   methods: {
     goProfile(username) {
       this.$router.replace("/profile/" + username);
+    },
+    goPost(uuid) {
+      this.$router.replace("/home/" + uuid);
+      setTimeout(() => location.reload(), 10);
     },
   },
   setup(props) {
@@ -130,6 +155,10 @@ export default {
 
 .touchable {
   @apply cursor-pointer;
+}
+
+.touchable:hover {
+  @apply underline;
 }
 
 .deleteButton {

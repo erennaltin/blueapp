@@ -17,6 +17,19 @@ query getProfile($username: String!) {
                 }
             }
         }
+        Comments {
+      name
+      post {
+        uuid
+      }
+      user {
+        username
+        photo
+      }
+      Time
+      Text
+    }
+        
   }
 }
   

@@ -5,9 +5,10 @@ import router from './router'
 import store from './store'
 import './index.css'
 import { ApolloClient, InMemoryCache, HttpLink, ApolloLink} from '@apollo/client'
-import { createUploadLink } from 'apollo-upload-client'
+// import { createUploadLink } from 'apollo-upload-client'
 import {DefaultApolloClient } from '@vue/apollo-composable'
-import { RetryLink } from '@apollo/client/link/retry';
+// import { RetryLink } from '@apollo/client/link/retry';
+
 
 
 const authMiddleware = new ApolloLink((operation, forward) => {
@@ -22,38 +23,23 @@ const authMiddleware = new ApolloLink((operation, forward) => {
     return forward(operation)
   })
 
-  
-
-// const getHeaders = () => {
-//     const headers = {};
-//      const token = window.localStorage.getItem('token');
-//      if (token) {
-//        headers.authorization = `Bearer ${token}`;
-//      }
-//      return headers;
-//    };
-   // Create an http link:
-//    const link = new HttpLink({
-//      uri: 'http://127.0.0.1:8000/graphql',
-//      fetch,
-//      headers: getHeaders()
-//    });
+const httpLink = new HttpLink({
+ //  uri: 'https://bluebackend.herokuapp.com/graphql',
+ uri: 'https://bluebackend.herokuapp.com/graphql'
+});
 
 
-   const httpLink = new HttpLink({
-     uri: 'https://bluebackend.herokuapp.com/graphql',
-   });
+// const links = new RetryLink().split(
+//  operation => operation.getContext().hasUpload,
+//  createUploadLink({
+//    // uri: 'https://bluebackend.herokuapp.com/graphql',
+//    uri: 'http://127.0.0.1:8000/graphql'
 
-
-   const links = new RetryLink().split(
-    operation => operation.getContext().hasUpload,
-    createUploadLink({
-      uri: 'https://bluebackend.herokuapp.com/graphql'
-    }),
-    httpLink
-  )
+//  }),
+//  httpLink
+// )
 const defaultClient = new ApolloClient({
-    link: authMiddleware.concat(links),
+    link: authMiddleware.concat(httpLink),
     cache: new InMemoryCache(),
     connectToDevTools: true,
     defaultOptions: {
@@ -63,8 +49,8 @@ const defaultClient = new ApolloClient({
     }
 })
 
-export default defaultClient;
 
+export default defaultClient;
 
 
 createApp({

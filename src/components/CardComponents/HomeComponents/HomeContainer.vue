@@ -24,8 +24,12 @@
         :homePost="homePost"
       />
     </div>
-    <SectionContainer v-if="ContainerMode" title="Objections" :information="[]">
-      <MakeObjectionButton />
+    <SectionContainer
+      v-if="ContainerMode"
+      title="Objections"
+      :information="InitialPost.Objections.edges"
+    >
+      <MakeObjectionButton @click="createObjection" />
     </SectionContainer>
     <SectionContainer
       v-if="ContainerMode"
@@ -45,6 +49,9 @@ import CardTags from "./CardTags.vue";
 import SectionContainer from "../SectionContainer.vue";
 import MakeObjectionButton from "./MakeObjectionButton.vue";
 import CommentBar from "./CommentBar.vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { computed } from "vue";
 
 export default {
   name: "CardContainer",
@@ -85,6 +92,18 @@ export default {
       }
     },
   },
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+    const InitialPost = computed(() => store.state.InitialPost);
+    const makeObjection = (payload) => store.dispatch("makeObjection", payload);
+    const createObjection = () => {
+      makeObjection({ ObjectionTo: InitialPost.value.uuid });
+      router.push("/create");
+    };
+
+    return { createObjection };
+  },
 };
 </script>
 
@@ -121,7 +140,12 @@ export default {
     border-r-4 border-b-4
     text-xl text-red-500
     font-bold
-    whitespace-nowrap;
+    whitespace-nowrap
+    cursor-pointer;
   width: 700px;
+}
+
+.CloseDetail:hover {
+  @apply underline;
 }
 </style>

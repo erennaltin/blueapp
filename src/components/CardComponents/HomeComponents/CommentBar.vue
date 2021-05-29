@@ -29,12 +29,6 @@ export default {
     const store = useStore();
     const user = computed(() => store.state.user2);
     const post = computed(() => store.state.InitialPost);
-    // const reserve = ref({
-    //   name: "",
-    //   Text: "",
-    //   Time: "",
-    //   user: {},
-    // });
     const getPost = (post) => store.dispatch("getPost", post);
 
     const { mutate: addComment, onDone } = useMutation(addCommentsMutation, () => ({
@@ -45,12 +39,8 @@ export default {
       },
     }));
 
-    // const { result: Refetch, refetch, loading } = useQuery(getPostByUUIDQuery, () => ({
-    //   uuid: post.value.uuid,
-    // }));
-    // const _post = useResult(Refetch);
-
     onDone((result) => {
+      console.log(result.data.addComment);
       if (result.data.addComment.comment.name !== "False") {
         defaultClient
           .query({
@@ -58,8 +48,11 @@ export default {
             variables: {
               uuid: post.value.uuid,
             },
+            fetchPolicy: "no-cache",
           })
           .then((res) => {
+            console.log(res);
+            console.log(res.data.posts[0]);
             getPost(res.data.posts[0]);
           });
       }

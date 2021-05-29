@@ -20,12 +20,13 @@ export default {
     // const route = useRoute();
     const store = useStore();
     const router = useRouter();
-
+    const makeObjection = (payload) => store.dispatch("makeObjection", payload);
     const goToProfile = () => {
       const user = store.state.user2;
       router.replace(`/profile/` + user.username);
     };
     const goToCreate = () => {
+      makeObjection({ ObjectionTo: "00000000-0000-0000-0000-000000000000" });
       router.replace("/create");
     };
 

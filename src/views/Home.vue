@@ -24,7 +24,7 @@
         v-if="Mode !== 'Decline'"
         @click="removeApprove"
       />
-      <ControlButton Component="Objection" />
+      <ControlButton Component="Objection" @click="setObjection" />
       <ControlButton
         Component="Comment"
         @click="
@@ -33,7 +33,6 @@
           }
         "
       />
-      <!-- <p> {{ifApproval.name}}</p> -->
     </div>
   </div>
 </template>
@@ -51,7 +50,7 @@ import checkDeclineQuery from "@/graphql/checkDecline.query.gql";
 
 import { computed, ref, watch } from "vue";
 import { useStore } from "vuex";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import RightArrow from "../components/CardComponents/HomeComponents/rightArrow.vue";
 
 export default {
@@ -83,11 +82,22 @@ export default {
       }
     },
     reload() {
-      location.reload();
+      if (
+        this.$route.fullPath == "/home/discover" ||
+        this.$route.fullPath === "/Home/discover"
+      ) {
+        location.reload();
+      } else {
+        this.$router.replace("/home/discover");
+        setTimeout(() => {
+          location.reload();
+        }, 10);
+      }
     },
   },
   setup() {
     const route = useRoute();
+    const router = useRouter();
     const slug = route.params.slug;
 
     const { result, loading } = useQuery(getRandomPostQuery, () => ({
@@ -96,13 +106,16 @@ export default {
     const RandomPost = useResult(result, {}, (data) => data.randomPost);
     const store = useStore();
     const Mode = computed(() => store.state.Mode);
-
+    const makeObjection = (objection) => store.dispatch("makeObjection", objection);
     const getPost = (post) => store.dispatch("getPost", post);
     const changeMode = (payload) => store.dispatch("changeMode", payload);
 
     const post = ref(store.state.InitialPost);
     const user = ref(store.state.user2);
 
+    if (user.value.firstName == "") {
+      router.replace("/update");
+    }
     watch(loading, () => {
       getPost(RandomPost.value);
       post.value = store.state.InitialPost;
@@ -160,7 +173,20 @@ export default {
       changeMode({ Mode: "Decline" });
     });
 
-    return { RandomPost, Mode, addApprove, post, user, ifApproval, removeApprove };
+    const setObjection = () => {
+      makeObjection({ ObjectionTo: post.value.uuid });
+      router.push("/create");
+    };
+    return {
+      RandomPost,
+      Mode,
+      addApprove,
+      post,
+      user,
+      ifApproval,
+      removeApprove,
+      setObjection,
+    };
   },
 };
 </script>
@@ -180,6 +206,10 @@ export default {
 }
 
 .text {
-  @apply text-2xl;
+  @apply text-2xl cursor-pointer;
+}
+
+.text:hover {
+  @apply underline;
 }
 </style>

@@ -1,27 +1,26 @@
 <template>
-    <div class="ObjectionButton">
-        <button type="submit"> Make an Objection </button> 
-    </div>
+  <div class="ObjectionButton">
+    <button type="button">Make an Objection</button>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "MakeObjectionButton",
-
-    }
+  name: "MakeObjectionButton",
+};
 </script>
 
 <style scoped>
 .ObjectionButton {
-    @apply w-full mr-4 ml-2;
+  @apply w-full mr-4 ml-2;
 }
 
 button {
-    @apply bg-blue-400 h-14 rounded-xl outline-none
+  @apply bg-blue-400 h-14 rounded-xl outline-none
     text-lg w-full font-semibold text-white;
 }
 
 button:focus {
-    @apply outline-none;
+  @apply outline-none;
 }
 </style>

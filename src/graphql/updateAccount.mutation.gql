@@ -1,0 +1,23 @@
+mutation updateUser($username: String!, $firstName: String!, $lastName: String!, $bio: String!, $photo: String!) {
+  updateAccount(username: $username, firstName: $firstName, lastName: $lastName, bio: $bio, photo: $photo) {
+    account {
+      username
+      firstName
+      lastName
+      bio
+      photo
+      Approvals {
+        name
+        Time
+        post {
+          Title
+          uuid
+          Owner {
+            username
+            photo
+          }
+        }
+      }
+    }
+  }
+}

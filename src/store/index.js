@@ -6,7 +6,7 @@ export default createStore({
       profilePicture: "",
       Username: "erennaltin"
     },
-    user2: {username: "loading", photo: "userdefault.png"},
+    user2: {username: "loading", photo: "https://bluebackend.herokuapp.com/graphql/media/userdefault.png"},
     homePost: {
       uuid: "Loading",
       PublishDate: "Loading",
@@ -31,8 +31,10 @@ export default createStore({
     },
     isAuth: false,
     initial: true,
-    serverMedia: "https://bluebackend.herokuapp.com/media/",
-    Mode: ''
+    // serverMedia: "https://bluebackend.herokuapp.com/media/",
+    serverMedia: "https://bluebackend.herokuapp.com/graphql/media/",
+    Mode: '',
+    ObjectionTo: '00000000-0000-0000-0000-000000000000'
   },
   mutations: {
     updateUser (state,payload) {
@@ -47,6 +49,9 @@ export default createStore({
     },
     changeModeMutation(state, payload) {
       state.Mode = payload.Mode
+    },
+    changeObjection(state, payload) {
+      state.ObjectionTo = payload.ObjectionTo
     }
   },
   actions: {
@@ -61,6 +66,9 @@ export default createStore({
     },
     changeMode({commit}, payload) {
       commit('changeModeMutation', payload)
+    },
+    makeObjection({commit}, payload) {
+      commit('changeObjection', payload)
     }
   },
   modules: {

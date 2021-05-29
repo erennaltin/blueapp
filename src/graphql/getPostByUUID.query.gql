@@ -19,15 +19,28 @@ query getPost($uuid: String!) {
     }
     Comments {
       name
+      post {
+        uuid
+      }
       user {
         username
         photo
       }
-      post {
-        uuid
-      }
       Time
       Text
+    }
+     Objections {
+      edges {
+        node {
+          PublishDate
+          Owner {
+            username
+            photo
+          }
+          Title
+          uuid
+        }
+      }
     }
   }
 }
